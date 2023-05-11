@@ -1,0 +1,33 @@
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        ans=[[0 for j in range(n)]for i in range(n)]
+        top=0
+        bottom=n-1
+        left=0
+        right=n-1
+        temp=n*n
+        val=1
+        while temp>0:
+            for j in range(left,right+1):
+                ans[top][j]=val
+                val+=1
+                temp-=1
+            top+=1
+            for j in range(top,bottom+1):
+                ans[j][right]=val
+                val+=1
+                temp-=1
+            right-=1
+            if bottom>=top:
+                for j in range(right,left-1,-1):
+                    ans[bottom][j]=val
+                    val+=1
+                    temp-=1
+                bottom-=1
+            if left<=right:
+                for j in range(bottom,top-1,-1):
+                    ans[j][left]=val
+                    val+=1
+                    temp-=1
+                left+=1
+        return ans
